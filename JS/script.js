@@ -17,15 +17,13 @@ function addTodo() {
 
 function iteration() {
   const todoHtml = document.getElementById('js-todo-list');
-  const todoLi = document.createElement('li');
-  const todoDelBtn = document.createElement('button');
-  for (i = 0; i <= todoList.length -1; i += 1) {
-    todoLi.innerHTML = todoList[i];
-    todoDelBtn.innerHTML = 'delete';
-    todoHtml.appendChild(todoLi);
-    todoHtml.appendChild(todoDelBtn);
-    console.log(todoHtml);
+  let todoItem
+  for (i = 0; i <= todoList.length - 1; i += 1) {
+    todoItem = todoList[i];
+
   };
+  todoHtml.innerHTML += `<p> ${todoItem}</p><button >delete</button>`;
+
 
 }
 
