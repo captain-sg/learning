@@ -1,59 +1,47 @@
-const todoList = [];
+const todoObj = [];
 
+renderTodo();
+
+const exepMess = document.getElementsByClassName("js-exep-mess");
 const btn = document.querySelector('button');
-btn.addEventListener('click', addTodo);
+btn.addEventListener("click", addTodo);
+
+function renderTodo() {
+  let todoListHtml = ''
+
+  for (i = 0; i < todoObj.length; i++) {
+    const todo = todoObj[i];
+    const todoName = todo.name;
+    const todoDueDate = todo.duedate;
+    console.log(todoName);
+    const Html = `<p>${i + 1}. ${todoName} </p><p>${todoDueDate} </p>
+    <button class="css-dlt-btn" onclick="
+      todoObj.splice(${i},1); 
+      renderTodo();">delete
+    </button>`;
+   
+    todoListHtml += Html;
+  };
+  document.getElementById("js-todo-list").innerHTML = todoListHtml;
+};
+
 
 function addTodo() {
   const inputValue = document.querySelector("input").value;
-  if (inputValue === '') {
-    return;
-
+  const dateInputValue = document.querySelector(".js-todo-date").value;
+console.log(inputValue && dateInputValue);
+  if (inputValue == "") {
+    exepMess[0].innerHTML = "pleas add something todo!";
+  } else if (dateInputValue == "") {
+    exepMess[0].innerHTML = "please add due-date for your todo!";
   } else {
-    todoList.push(inputValue);
-    document.querySelector('input').value = '';
-    iteration();
+    exepMess[0].innerHTML = "";
+    todoObj.push({
+      name: inputValue,
+      duedate: dateInputValue,
+    });
+    document.querySelector("input").value = "";
+    document.querySelector(".js-todo-date").value = "";
+    renderTodo();
   }
 }
-
-function iteration() {
-  const todoHtml = document.getElementById('js-todo-list');
-  let todoItem
-  for (i = 0; i <= todoList.length - 1; i += 1) {
-    todoItem = todoList[i];
-
-  };
-  todoHtml.innerHTML += `<p> ${todoItem}</p><button >delete</button>`;
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// console.log(todoList)
-//   const todoHtml = document.getElementById("todo-list");
-//   const todoItem = document.createElement("li");
-//   for (i = 0; i <= todoList.length - 1; i += 1) {
-//     todoItem.textContent = todoList[i];//adds itm to todoItem txtcont
-//     console.log(todoItem);
-//     todoHtml.appendChild(todoItem);
-
-//     // todoHtml.innerHTML = `<li>${todoList[i]}</li>`;
-//   }
-// }
